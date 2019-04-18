@@ -80,6 +80,14 @@ class Event
     }
 
     /**
+     * Triggers current event.
+     */
+    public function trigger()
+    {
+        EventsManager::current()->triggerEvent($this);
+    }
+
+    /**
      * Event constructor.
      *
      * @param string $type
