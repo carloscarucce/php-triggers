@@ -1,0 +1,14 @@
+{
+  "name": "carloscarucce/php-triggers",
+  "description": "Create events and listeners using php",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "PhpTriggers\\": "./src"
+    }
+  }
+}
