@@ -5,6 +5,11 @@ namespace PhpTriggers;
 class Event
 {
     /**
+     * @var bool
+     */
+    private $cancelled = false;
+
+    /**
      * @var array
      */
     private $data = [];
@@ -12,7 +17,7 @@ class Event
     /**
      * @var bool
      */
-    private $stopped = false;
+    private $stoppedPropagation = false;
 
     /**
      * @var string
@@ -28,6 +33,14 @@ class Event
     public static function create($type, array $data)
     {
         return new static($type, $data);
+    }
+
+    /**
+     * Stops execution (must be respected by the event 'invoker')
+     */
+    public function cancel()
+    {
+        $this->cancelled = true;
     }
 
     /**
@@ -50,9 +63,17 @@ class Event
      * Informs if the current event is stopped
      * @return bool
      */
-    public function isStopped()
+    public function hasStoppedPropagation()
     {
-        return $this->stopped;
+        return $this->stoppedPropagation;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCancelled()
+    {
+        return $this->cancelled;
     }
 
     /**
@@ -74,9 +95,9 @@ class Event
     /**
      * Prevent next executions
      */
-    public function stop()
+    public function stopPropagation()
     {
-        $this->stopped = true;
+        $this->stoppedPropagation = true;
     }
 
     /**

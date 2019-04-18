@@ -73,7 +73,7 @@ class EventsManager
 
             $listener->listen($event, ...array_values($event->getData()));
 
-            if ($event->isStopped()) {
+            if ($event->hasStoppedPropagation()) {
                 break;
             }
         }
