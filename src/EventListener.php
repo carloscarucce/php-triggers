@@ -22,7 +22,7 @@ abstract class EventListener
     /**
      * Determines what types of events this will listen to.
      *
-     * @param string|string[] $types
+     * @param string|string[] $type
      */
     public function listensTo($type)
     {
