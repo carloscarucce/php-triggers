@@ -66,6 +66,16 @@ class EventsManager
      */
     public function triggerEvent(Event $event)
     {
-        //
+        foreach ($this->listeners as $listener) {
+            if (!$listener->willListenTo($event)) {
+                continue;
+            }
+
+            $listener->listen($event, ...array_values($event->getData()));
+
+            if ($event->isStopped()) {
+                break;
+            }
+        }
     }
 }
