@@ -40,4 +40,12 @@ abstract class EventListener
     {
         return in_array($event->getType(), $this->eventTypes);
     }
+
+    /**
+     * Adds listener to the current listener.
+     */
+    public function register()
+    {
+        EventsManager::current()->addListener($this);
+    }
 }
