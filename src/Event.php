@@ -20,6 +20,17 @@ class Event
     private $type;
 
     /**
+     * @param string $type
+     * @param array $data
+     *
+     * @return Event
+     */
+    public static function create($type, array $data)
+    {
+        return new static($type, $data);
+    }
+
+    /**
      * @return array
      */
     public function getData()
