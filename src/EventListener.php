@@ -20,6 +20,14 @@ abstract class EventListener
     abstract public function listen(Event $event, ...$data);
 
     /**
+     * This listener will respond to every event.
+     */
+    final public function listensEverything()
+    {
+        $this->eventTypes = '*';
+    }
+
+    /**
      * Determines what types of events this will listen to.
      *
      * @param string|string[] $type
@@ -38,6 +46,10 @@ abstract class EventListener
      */
     final public function willListenTo(Event $event)
     {
+        if ($this->eventTypes === '*') {
+            return true;
+        }
+
         return in_array($event->getType(), $this->eventTypes);
     }
 
