@@ -33,9 +33,6 @@ class MyListener extends EventListener
         echo "Welcome $name $lastName !";
     }
 
-    /**
-     * LambdaFunctionsListener constructor.
-     */
     public function __construct()
     {
         $this->listensTo('check-in');
