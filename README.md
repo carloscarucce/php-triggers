@@ -19,10 +19,12 @@ All you have to do is run *composer require carloscarucce/php-triggers* or add t
 
 First you have to setup a listener to your event.
 
+1. Declare listener:
 ```php
+use PhpTriggers\Event;
 use PhpTriggers\EventListener;
 
-class LambdaFunctionsListener extends EventListener
+class MyListener extends EventListener
 {
     public function listen(Event $event, ...$data)
     {
@@ -41,6 +43,13 @@ class LambdaFunctionsListener extends EventListener
 }
 ```
 
+2. Register listener:
+```php
+$listener = new MyListener();
+$listener->register();
+```
+
+
 Then all you have to do is trigger that event whenever you want to:
 
 ```php
@@ -51,3 +60,5 @@ Event::create('check-in', [
     'lastName' => 'Doe'
 ])->trigger();
 ```
+
+Enjoy!
