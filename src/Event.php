@@ -4,6 +4,9 @@ namespace PhpTriggers;
 
 class Event
 {
+    const RESULTS_STORE = true;
+    const RESULTS_IGNORE = false;
+
     /**
      * @var bool
      */
@@ -157,7 +160,7 @@ class Event
      * @param array  $data
      * @param bool   $storeResults
      */
-    public function __construct($type, array $data, $storeResults = false)
+    public function __construct($type, array $data, $storeResults = self::RESULTS_IGNORE)
     {
         $this->setType($type);
         $this->setData($data);
