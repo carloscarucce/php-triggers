@@ -15,9 +15,19 @@ class Event
     private $data = [];
 
     /**
+     * @var array
+     */
+    private $results = [];
+
+    /**
      * @var bool
      */
     private $stoppedPropagation = false;
+
+    /**
+     * @var bool
+     */
+    private $storeResults = false;
 
     /**
      * @var string
@@ -26,7 +36,7 @@ class Event
 
     /**
      * @param string $type
-     * @param array $data
+     * @param array  $data
      *
      * @return Event
      */
@@ -49,6 +59,22 @@ class Event
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResults()
+    {
+        return $this->results;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getStoreResults()
+    {
+        return $this->storeResults;
     }
 
     /**
@@ -101,22 +127,40 @@ class Event
     }
 
     /**
+     * @param mixed $result
+     */
+    public function storeResult($result)
+    {
+        if (!$this->storeResults) {
+            return;
+        }
+
+        $this->results[] = $result;
+    }
+
+    /**
      * Triggers current event.
+     *
+     * @return array|null
      */
     public function trigger()
     {
         EventsManager::current()->triggerEvent($this);
+
+        return $this->storeResults ? $this->getResults() : null;
     }
 
     /**
      * Event constructor.
      *
      * @param string $type
-     * @param array $data
+     * @param array  $data
+     * @param bool   $storeResults
      */
-    public function __construct($type, array $data)
+    public function __construct($type, array $data, $storeResults = false)
     {
         $this->setType($type);
         $this->setData($data);
+        $this->storeResults = $storeResults;
     }
 }

@@ -71,7 +71,8 @@ class EventsManager
                 continue;
             }
 
-            $listener->listen($event, ...array_values($event->getData()));
+            $result = $listener->listen($event, ...array_values($event->getData()));
+            $event->storeResult($result);
 
             if ($event->hasStoppedPropagation()) {
                 break;
