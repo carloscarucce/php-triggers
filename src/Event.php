@@ -40,12 +40,13 @@ class Event
     /**
      * @param string $type
      * @param array  $data
+     * @param bool   $storeResults
      *
      * @return Event
      */
-    public static function create($type, array $data)
+    public static function create($type, array $data, $storeResults = self::RESULTS_IGNORE)
     {
-        return new static($type, $data);
+        return new static($type, $data, $storeResults);
     }
 
     /**
@@ -160,7 +161,7 @@ class Event
      * @param array  $data
      * @param bool   $storeResults
      */
-    public function __construct($type, array $data, $storeResults = self::RESULTS_IGNORE)
+    public function __construct($type, array $data, $storeResults)
     {
         $this->setType($type);
         $this->setData($data);
